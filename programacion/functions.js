@@ -23,3 +23,21 @@ function semaforo(color){
             return "No es color de semaforo";
     }
 }
+
+function capicua(numero){
+    var tmp = numero;
+    var res = 0;
+    var reves = 0;
+    do{
+        res = tmp%10;
+        tmp = Math.floor(tmp/10);
+        if(tmp > 9) reves = (reves + res) * 10;
+        else reves = reves + res;
+    }while(tmp > 10);
+    reves = (reves * 10) + tmp;
+    if(reves == numero){
+        return numero+" es capicua";
+    }else{
+        return numero+" no es capicua";
+    }
+}
