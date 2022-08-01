@@ -1,0 +1,60 @@
+DROP DATABASE IF EXISTS SISTEMA_BANCARI;
+CREATE DATABASE SISTEMA_BANCARI;
+USE SISTEMA_BANCARI;
+
+CREATE TABLE USUARI(
+	DNI VARCHAR(9) PRIMARY KEY,
+    NOM VARCHAR(50) NOT NULL,
+    COGNOM1 VARCHAR(50) NOT NULL,
+    COGNOM2 VARCHAR(50) NOT NULL,
+    PHONE VARCHAR(9) NOT NULL,
+    EMAIL VARCHAR(100) NOT NULL
+)ENGINE=InnoDB;
+
+CREATE TABLE BANC(
+	SEU VARCHAR(11) PRIMARY KEY,
+    NOM VARCHAR(50) NOT NULL,
+    EMAIL VARCHAR(50) NOT NULL
+)ENGINE=InnoDB;
+
+CREATE TABLE COMPTE(
+	COMPTE VARCHAR(20) PRIMARY KEY,
+    BANC VARCHAR(11) NOT NULL,
+    USUARI VARCHAR(9) NOT NULL,
+    SALDO INT,
+    TIPUS VARCHAR(50) NOT NULL,
+	CONSTRAINT FK_BANC FOREIGN KEY(BANC) REFERENCES BANC(SEU),
+	CONSTRAINT FK_USUARI FOREIGN KEY(USUARI) REFERENCES USUARI(DNI)
+)ENGINE=InnoDB;
+
+CREATE TABLE MOVIMENTS(
+	COMPTE_SORTIDA VARCHAR(20) NOT NULL,
+    COMPTE_DESTI VARCHAR(20) NOT NULL,
+    TRANSACCIO INT NOT NULL,
+    CONSTRAINT FK_SORTIDA FOREIGN KEY(COMPTE_SORTIDA) REFERENCES COMPTE(COMPTE),
+	CONSTRAINT FK_DESTI FOREIGN KEY(COMPTE_DESTI) REFERENCES COMPTE(COMPTE)
+)ENGINE=InnoDB;
+
+INSERT INTO USUARI VALUES("11111111Y", "Ana", "Paz", "Sil", "111111111", "ap@ap.ap"),
+						 ("22222222D", "Pere", "Calvo", "Sol", "222222222", "pc@pc.pc"),
+						 ("33333333K", "Carla", "Soto", "Mas", "333333333", "cs@cs.cs"),
+						 ("44444444C", "David", "Mota", "Mota", "444444444", "dm@dm.dm"),
+						 ("55555555O", "Laura", "Mayor", "Mayor", "555555555", "lm@lm.lm");
+                         
+INSERT INTO BANC VALUES("COD00001", "IMG", "img@img.img"),
+                       ("COD00002", "Santander", "santander@santander.santander"),
+                       ("COD00003", "Sabadell", "sabadell@sabadell.sabadell"),
+                       ("COD00004", "BBVA", "bbva@bbva.bbva"),
+                       ("COD00005", "La caixa", "caixa@caixa.caixa");
+                       
+INSERT INTO COMPTE VALUES("COMPTE00001", "COD00001", "11111111Y", 10000, "Corrent"),
+						 ("COMPTE00002", "COD00002", "22222222D", 5000, "Estalvis"),
+                         ("COMPTE00003", "COD00003", "33333333K", 20000, "Estalvis"),
+                         ("COMPTE00004", "COD00004", "44444444C", 10000, "Estalvis"),
+                         ("COMPTE00005", "COD00005", "55555555O", 12000, "Corrent");
+                         
+INSERT INTO MOVIMENTS VALUES("COMPTE00001", "COMPTE00002", 400),
+							("COMPTE00002", "COMPTE00005", 1000),
+                            ("COMPTE00004", "COMPTE00003", 400),
+                            ("COMPTE00002", "COMPTE00001", 800),
+                            ("COMPTE00001", "COMPTE00002", 400);
