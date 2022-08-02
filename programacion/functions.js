@@ -49,6 +49,12 @@ function variables(){
     var cadena = "Soy una cadena";
     var array = ["PHP", "Java", "C#"];
 
+    var array_asociativo = [];
+
+    array_asociativo["nombre"] = "Laura Sanchez";
+    array_asociativo["edad"] = 29;
+    array_asociativo["ciudad"] = "Zaragoza";
+
     var objeto_literal = {
         nombre: "Enrique Flo",
         edad: 55,
@@ -60,9 +66,10 @@ function variables(){
             return "10.560";
         }
     }
-    alert("Variables primitivas\n"+numero+", "+decimal+", "+boleano+", "+cadena+"\nArrays\n"+
-          array[0]+", "+array[1]+", "+array[2]+"\nObjeto literal\n"+objeto_literal.nombre+", "+objeto_literal["edad"]+
-          ", "+objeto_literal["ciudad"]+", "+objeto_literal.dos()+", "+objeto_literal.pasta())
+    alert("Variables primitivas\n"+numero+", "+decimal+", "+boleano+", "+cadena+"\nArrays\n"+array[0]+", "+array[1]+
+          ", "+array[2]+"\n"+array_asociativo["nombre"]+", "+array_asociativo["edad"]+", "+array_asociativo["ciudad"]+
+          "\nObjeto literal\n"+objeto_literal.nombre+", "+objeto_literal["edad"]+", "+objeto_literal["ciudad"]+
+          ", "+objeto_literal.dos()+", "+objeto_literal.pasta())
 }
 
 function imprimir_numero(num){
